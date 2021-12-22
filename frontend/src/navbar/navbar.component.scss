@@ -1,0 +1,26 @@
+.navbar-bg {
+    background-color: blueviolet;
+  }
+  .navbar {
+    padding: 10px 30px;
+  }
+  .navbar-toggler {
+    display: none;
+  }
+  .navbar-light .navbar-nav .nav-link {
+      color: #ffffff;
+      padding: 11px;
+      font-weight: 600;
+      font-family: "Inter", sans-serif;
+    }
+    .navbar-light .navbar-nav .nav-item {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    .navbar-light .navbar-nav .nav-item.active a {
+      color: #ffb800;
+    }
+    .navbar-light .navbar-nav .nav-item a:hover {
+      color: #ffb800;
+    }
+  

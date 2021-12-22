@@ -1,0 +1,54 @@
+<div class="container">
+    <form class="add-user-page" [formGroup]="userForm" >
+        <div class="w-100 pull-left">
+            <h2 class="main-heading">New User</h2>
+            <div class="pull-right">
+                <a routerLink="/users" class="cancel btn">Cancel</a> 
+                <button class="send-invite yellow-btn" (click)="createNewUser()" type="submit">Send Invite</button>
+            </div>
+        </div>
+        <div class="form-section">
+            <!-- <div class="flash-message-display">
+                <flash-messages></flash-messages>
+              </div>    -->
+            <h4>Basic Information</h4>
+            <p>An email will be delivered to the user’s email address with an invite link to complete the invite process.</p>            
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset class="form-group">
+                        <input type="text" required class="inp_1" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && validateUser.firstName.errors }" placeholder=" "/>
+                        <label>First Name</label>     
+                        <div *ngIf="submitted && validateUser.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="validateUser.firstName.errors.required">First Name is required</div>
+                        </div>                   
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset class="form-group">
+                        <input type="text" required class="inp_1" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && validateUser.lastName.errors }" placeholder=" "/>                        
+                        <label>Last Name</label>   
+                        <div *ngIf="submitted && validateUser.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="validateUser.lastName.errors.required">Last Name is required</div>
+                        </div>                     
+                    </fieldset>
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <input type="text" required class="inp_1" formControlName="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [ngClass]="{ 'is-invalid': submitted && validateUser.email.errors }" placeholder=" "/>
+                <label>Email Address</label> 
+                <div *ngIf="submitted && validateUser.email.errors" class="invalid-feedback">
+                    <div *ngIf="validateUser.email.errors.required">Email is required</div>
+                    <div *ngIf="validateUser.email.errors.pattern" class="validate-field">Enter valid email address.</div>
+                </div> 
+            </fieldset> 
+            <fieldset class="form-group">
+                <input type="text" required class="inp_1" formControlName="mobileNumber" [ngClass]="{ 'is-invalid': submitted && validateUser.mobileNumber.errors }" placeholder=" "/>
+                <label>Mobile Number</label>     
+                <div *ngIf="submitted && validateUser.mobileNumber.errors" class="invalid-feedback">
+                    <div *ngIf="validateUser.mobileNumber.errors.required">Mobile Number is required</div>
+                </div>                   
+            </fieldset>
+        </div>
+    </form>
+</div>
+<router-outlet></router-outlet>
