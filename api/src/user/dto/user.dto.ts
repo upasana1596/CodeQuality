@@ -21,7 +21,7 @@ export class UserDto {
   verification_code: string;
 
   @Field(() => Number,{nullable : true})
-  status: number;
+  status_code: number;
   
   @Field({nullable : true})
   createdAt: Date;

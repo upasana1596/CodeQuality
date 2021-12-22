@@ -9,7 +9,7 @@ type UserDto {
   email: String!
   mobile_no: Float!
   verification_code: String
-  status: Float
+  status_code: Float
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -20,12 +20,15 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
+  GetAllUsers: [UserDto!]!
   checkIfEmailExists(emailId: String!): Boolean!
+  GetUserByID(id: String!): UserDto!
+  verifyAuthCode(verificationCode: String!, email: String!): Boolean!
 }
 
 type Mutation {
   SignUp(input: UserInput!): Boolean!
-  SendEmail(emailId: String!): UserDto!
+  SendEmail(verification_code: String!, emailId: String!): UserDto!
 }
 
 input UserInput {
@@ -33,6 +36,6 @@ input UserInput {
   last_name: String!
   mobile_no: Float!
   email: String!
-  status: Float
+  status_code: Float
   verification_code: String
 }

@@ -16,7 +16,7 @@ export class UserInput {
   readonly email: string;
 
   @Field(() => Number,{nullable:true})
-  readonly status: number;
+  readonly status_code: number;
 
   @Field(() => String,{nullable:true})
   readonly verification_code: string;

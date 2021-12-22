@@ -19,7 +19,7 @@ export class User extends Document{
     email: string;
 
     @Prop()
-    status: number;
+    status_code: number;
 
     @Prop()
     verification_code: string;
