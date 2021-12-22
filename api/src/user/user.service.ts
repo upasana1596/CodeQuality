@@ -14,9 +14,10 @@ export class UserService {
       return await this.userModel.find().exec();
     }
 
-    async create(userInput: UserInput): Promise<UserDto> {
+    async create(userInput: UserInput,verification_code:string): Promise<UserDto> {
         const createdItem = new this.userModel(userInput);
         createdItem.status_code = 0;
+        createdItem.verification_code = verification_code;
         return createdItem.save();
     }
 

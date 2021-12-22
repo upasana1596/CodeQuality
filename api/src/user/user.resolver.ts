@@ -29,7 +29,7 @@ export class UserResolver {
       const verification_code = uuid();
       if(!email){
         const result = await this.SendEmail(input.email,verification_code);
-        await this.userService.create(input);
+        await this.userService.create(input,verification_code);
       }else{
         return false;
       }
@@ -63,7 +63,7 @@ export class UserResolver {
     async getUserById( @Args('id') id: string) {
       return this.userService.findOne(id);
     }
-    
+
     /**
     * Verify verifcation code
     * @param 
