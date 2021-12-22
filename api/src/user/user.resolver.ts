@@ -69,7 +69,7 @@ export class UserResolver {
 
     /**
     * Verify verifcation code
-    * @param 
+    * @param email,verificationCode
     * @return Boolean
     */
     @Query(() => Boolean, { name: 'verifyAuthCode' })
@@ -90,13 +90,17 @@ export class UserResolver {
         }
       }
     }
+    
     /**
     * Complete User Account
-    * @param object
+    * @param email,status,password
     * @return Boolean
     */
      @Mutation(() => Boolean, { name: 'CompleteUserAccountProcess' })
-     async CompleteUserAccountProcess(@Args('email') email: string,@Args('status') status: number,@Args('password') password: string) {
+     async CompleteUserAccountProcess(
+       @Args('email') email: string,
+       @Args('status') status: number,
+       @Args('password') password: string) {
       const passwordHash = await appHashPassword(password);
       return await this.userService.updateUserPassword(email,status,passwordHash);
      }
