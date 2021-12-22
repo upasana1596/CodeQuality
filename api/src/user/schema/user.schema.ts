@@ -24,6 +24,9 @@ export class User extends Document{
     @Prop()
     verification_code: string;
 
+    @Prop()
+    passwordHash: string;
+
     @Prop({required : true, default: () => new Date()})
     createdAt: Date;
 

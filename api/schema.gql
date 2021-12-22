@@ -10,6 +10,7 @@ type UserDto {
   mobile_no: Float!
   verification_code: String
   status_code: Float
+  passwordHash: String
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -29,6 +30,7 @@ type Query {
 type Mutation {
   SignUp(input: UserInput!): Boolean!
   SendEmail(verification_code: String!, emailId: String!): UserDto!
+  CompleteUserAccountProcess(password: String!, status: Float!, email: String!): Boolean!
 }
 
 input UserInput {
@@ -38,4 +40,5 @@ input UserInput {
   email: String!
   status_code: Float
   verification_code: String
+  passwordHash: String
 }

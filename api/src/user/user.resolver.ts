@@ -4,12 +4,13 @@ import { UserDto } from './dto/user.dto';
 import { UserInput } from './user.input';
 import { MailService } from 'src/mail/mail.service';
 import { v4 as uuid } from 'uuid';
+import { appHashPassword } from 'src/crypto/crypto.util';
 
 @Resolver()
 export class UserResolver {
     constructor(private readonly userService: UserService,private mailService: MailService) {}
 
-     /**
+    /**
     * Get All Users Info. 
     * @return users information.
     */
@@ -27,7 +28,6 @@ export class UserResolver {
     async signUp(@Args('input') input: UserInput) {
       const email = await this.checkIfEmailExists(input.email);
       const verification_code = uuid();
-      console.log(verification_code,"resolver");
       if(!email){
         const result = await this.SendEmail(input.email,verification_code);
         await this.userService.create(input,verification_code);
@@ -52,8 +52,9 @@ export class UserResolver {
     */
     @Mutation(() => UserDto, { name: 'SendEmail' })
     async SendEmail(@Args('emailId') emailId: string,@Args('verification_code') verification_code: string){
-      console.log(verification_code,"email code")
-      return this.mailService.sendUserConfirmation(emailId,verification_code);
+      const data = await this.mailService.sendUserConfirmation(emailId,verification_code);
+      console.log(data,"data")
+      return data;
     }
 
     /**
@@ -89,4 +90,14 @@ export class UserResolver {
         }
       }
     }
+    /**
+    * Complete User Account
+    * @param object
+    * @return Boolean
+    */
+     @Mutation(() => Boolean, { name: 'CompleteUserAccountProcess' })
+     async CompleteUserAccountProcess(@Args('email') email: string,@Args('status') status: number,@Args('password') password: string) {
+      const passwordHash = await appHashPassword(password);
+      return await this.userService.updateUserPassword(email,status,passwordHash);
+     }
 }

@@ -15,10 +15,10 @@ export class UserService {
     }
 
     async create(userInput: UserInput,verification_code:string): Promise<UserDto> {
-        const createdItem = new this.userModel(userInput);
-        createdItem.status_code = 0;
-        createdItem.verification_code = verification_code;
-        return createdItem.save();
+        const createdUser = new this.userModel(userInput);
+        createdUser.status_code = 0;
+        createdUser.verification_code = verification_code;
+        return createdUser.save();
     }
 
     async findOne(id:string): Promise<UserDto> {
@@ -39,4 +39,15 @@ export class UserService {
       const user = await this.userModel.findOne({ email });
       return user;
     }
+  async updateUserPassword(email:string,status:number,passwordHash:string): Promise<any> {
+    const createdUser = await this.userModel.findOne({ email });
+    createdUser.passwordHash = passwordHash;
+    createdUser.status_code = status;
+    const updatePassword = createdUser.save();
+    if(updatePassword){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

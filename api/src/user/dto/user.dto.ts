@@ -22,6 +22,9 @@ export class UserDto {
 
   @Field(() => Number,{nullable : true})
   status_code: number;
+
+  @Field(() => String, { nullable: true })
+  passwordHash: string;
   
   @Field({nullable : true})
   createdAt: Date;

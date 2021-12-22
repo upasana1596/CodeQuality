@@ -20,4 +20,7 @@ export class UserInput {
 
   @Field(() => String,{nullable:true})
   readonly verification_code: string;
+
+  @Field(() => String, { nullable: true })
+  readonly passwordHash: string;
 }

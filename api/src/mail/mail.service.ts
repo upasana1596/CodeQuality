@@ -13,14 +13,14 @@ export class MailService {
         from: "<upasna@appsvolt.com>",
         to: emailId,
         subject: emailSubject,
-        text: 'Hello world ',
         template: './confirmation', 
         context: { 
-           name: "upasana",
            url:Url,
         },
       })
-      .then(() => {})
-      .catch(() => {});
+      .then(() => {
+      })
+      .catch(() => {
+      });
     }
 }
