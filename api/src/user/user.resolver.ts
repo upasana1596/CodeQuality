@@ -27,6 +27,7 @@ export class UserResolver {
     async signUp(@Args('input') input: UserInput) {
       const email = await this.checkIfEmailExists(input.email);
       const verification_code = uuid();
+      console.log(verification_code,"resolver");
       if(!email){
         const result = await this.SendEmail(input.email,verification_code);
         await this.userService.create(input,verification_code);
@@ -51,6 +52,7 @@ export class UserResolver {
     */
     @Mutation(() => UserDto, { name: 'SendEmail' })
     async SendEmail(@Args('emailId') emailId: string,@Args('verification_code') verification_code: string){
+      console.log(verification_code,"email code")
       return this.mailService.sendUserConfirmation(emailId,verification_code);
     }
 
