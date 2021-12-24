@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { UserDto } from './dto/user.dto';
 import { UserInput } from './user.input';
 import { User, UserDocument } from './schema/user.schema';
-import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class UserService {
@@ -69,7 +68,7 @@ export class UserService {
     * @param email,status,passwordHash 
     * @return Boolean
     */ 
-    async updateUserPassword(email:string,status:number,passwordHash:string): Promise<any> {
+    async setUserPassword(email:string,status:number,passwordHash:string): Promise<any> {
       const createdUser = await this.userModel.findOne({ email });
       createdUser.passwordHash = passwordHash;
       createdUser.status_code = status;
@@ -79,5 +78,32 @@ export class UserService {
       }else{
         return false;
       }
+    }
+
+    /**
+    * Delete User
+    * @param id 
+    * @return user information
+    */ 
+     async deleteUser(id:string): Promise<any> {
+      const user = await this.userModel.findOne({ id });
+      user.status_code = 2;
+      const userInfo = user.save();
+      return userInfo;
+    }
+
+    /**
+    * Update User
+    * @param id,userInput
+    * @return user information
+    */ 
+     async updateUser(id:string,userInput: UserInput): Promise<any> {
+      const user = await this.userModel.findOne({ id });
+      user.first_name = userInput.first_name;
+      user.last_name = userInput.last_name;
+      user.status_code = userInput.status_code;
+      user.mobile_no = userInput.mobile_no;
+      const userInfo = user.save();
+      return userInfo;
     }
 }

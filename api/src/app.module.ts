@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { MailModule } from './mail/mail.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { MailModule } from './mail/mail.module';
       playground: true
     }),
     MongooseModule.forRoot('mongodb://localhost/demo'), 
-    UserModule, MailModule,],
+    UserModule, MailModule, AuthModule],
   providers: [AppService],
 })
 export class AppModule {}

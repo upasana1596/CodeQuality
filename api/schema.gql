@@ -6,7 +6,7 @@ type UserDto {
   id: ID!
   first_name: String!
   last_name: String!
-  email: String!
+  email: String
   mobile_no: Float!
   verification_code: String
   status_code: Float
@@ -20,17 +20,31 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type SigninDto {
+  accessToken: String!
+  user: UserDto!
+}
+
 type Query {
   GetAllUsers: [UserDto!]!
   checkIfEmailExists(emailId: String!): Boolean!
   GetUserByID(id: String!): UserDto!
   verifyAuthCode(verificationCode: String!, email: String!): Boolean!
+  Login(signinInput: SignInInput!): SigninDto!
+  SendForgotPasswordReq(email: String!): Boolean!
+}
+
+input SignInInput {
+  email: String!
+  passwordHash: String
 }
 
 type Mutation {
   SignUp(input: UserInput!): Boolean!
   SendEmail(verification_code: String!, emailId: String!): UserDto!
   CompleteUserAccountProcess(password: String!, status: Float!, email: String!): Boolean!
+  DeleteUser(id: String!): UserDto!
+  UpdateUser(input: UserInput!, id: String!): UserDto!
 }
 
 input UserInput {
