@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddUserComponent } from 'src/registerUser/add-user.component';
+import { GraphQLModule } from './graphql.module';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { AddUserComponent } from 'src/registerUser/add-user.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    GraphQLModule
 
   ],
   providers: [],
