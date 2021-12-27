@@ -7,20 +7,12 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 @Module({
   imports: [
     MailerModule.forRoot({
-      // transport: {
-      //   host: 'smtp.mailtrap.io',
-      //   secure: false,
-      //   auth: {
-      //     user: '42d361bf2ba812',
-      //     pass: 'f8cb7a6a834019',
-      //   },
-      // },
       transport: {
         host: 'smtp.zoho.com',
         secure: false,
         auth: {
           user: 'upasna@appsvolt.com',
-          pass: 'Full$tack@123',
+          pass: 'upasana2315',
         },
       },
       defaults: {

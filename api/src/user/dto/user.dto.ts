@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { ObjectType, Field, Int, ID, InputType } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserDto {
@@ -11,7 +11,7 @@ export class UserDto {
   @Field(() => String)
   last_name: string;
 
-  @Field(() => String)
+  @Field(() => String,{nullable : true})
   email: string;
 
   @Field(() => Number)
@@ -31,4 +31,5 @@ export class UserDto {
 
   @Field({nullable:true})
   updatedAt: Date;
+  
 }

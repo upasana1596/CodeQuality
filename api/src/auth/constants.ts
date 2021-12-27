@@ -1,0 +1,1 @@
+export const jwtConstants = 'abcdef1234567890'
