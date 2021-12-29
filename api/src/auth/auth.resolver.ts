@@ -21,7 +21,7 @@ export class AuthResolver {
   * Get All Users Info. 
   * @return users information.
   */
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   @Query(() => [UserDto], { name: 'GetAllUsers' })
   async getAllUsers() {
     return this.userService.findAll();
