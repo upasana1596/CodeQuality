@@ -31,7 +31,8 @@ type Query {
   GetUserByID(id: String!): UserDto!
   verifyAuthCode(verificationCode: String!, email: String!): Boolean!
   Login(signinInput: SignInInput!): SigninDto!
-  SendForgotPasswordReq(email: String!): Boolean!
+  SendForgotPasswordRequest(email: String!): Boolean!
+  SendResetPasswordRequest(email: String!): Boolean!
 }
 
 input SignInInput {
@@ -45,6 +46,8 @@ type Mutation {
   CompleteUserAccountProcess(password: String!, status: Float!, email: String!): Boolean!
   DeleteUser(id: String!): UserDto!
   UpdateUser(input: UserInput!, id: String!): UserDto!
+  UpdateResetUserPassword(oldpasswordHash: String!, newPasswordHash: String!, email: String!): Boolean!
+  UpdateForgotUserPassword(newPasswordHash: String!, email: String!): Boolean!
 }
 
 input UserInput {

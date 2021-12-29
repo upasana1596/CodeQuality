@@ -62,4 +62,33 @@ export class MailService {
           return { Status: 400, Error: err };
       });
     }
+
+    /**
+    * Send Reset Password Link 
+    * @param email,verification_code
+    * @return status 
+    */
+     async sendForgotPasswordLink(emailId: string,verification_code:string) {  
+      const emailSubject = 'Reset Password';
+      const emailBody = `To reset your password, please click the following link (or copy and paste it into your browser).`;
+      const url = `http://localhost:3000/forgot-password/${emailId}/${verification_code}`;
+      const mailOptions = {
+        from: "<upasna@appsvolt.com>",
+        to: emailId,
+        subject: emailSubject,
+        template: './forgotpassword', 
+        context: { 
+          url:url,
+          emailBody:emailBody
+        },
+      };
+      const sentEmali = this.mailerService.sendMail(mailOptions);
+      return sentEmali
+        .then((data: { MessageId: any }) => {
+          return { Status: 200, messageId: data.MessageId };
+        })
+        .catch((err: { stack: any }) => {
+          return { Status: 400, Error: err };
+      });
+    }
 }
