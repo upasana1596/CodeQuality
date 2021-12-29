@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { appHashPassword } from 'src/crypto/crypto.util';
+import { appComparePasswords, appHashPassword } from 'src/crypto/crypto.util';
 import { MailService } from 'src/mail/mail.service';
 import { UserDto } from 'src/user/dto/user.dto';
 import { UserInput } from 'src/user/user.input';
@@ -127,8 +127,14 @@ export class AuthResolver {
   @Query(() => SigninDto, { name: 'Login' })
   async Login(@Args('signinInput') signinInput: SignInInput) : Promise<SigninDto>{
     const user = (await this.userService.findByEmail(signinInput.email)) as User;
-    const accessToken = await this.authService.getUserAccessToken(user)
-    return { user, accessToken } as SigninDto;
+    const result = await appComparePasswords(signinInput.passwordHash, user.passwordHash);
+    if(result === true){
+      const accessToken = await this.authService.getUserAccessToken(user);
+      return { user, accessToken } as SigninDto;
+    }else{
+      const accessToken = '';
+      return { user, accessToken } as SigninDto;
+    }
   }
 
   /**
@@ -216,7 +222,7 @@ export class AuthResolver {
 
   /**
   * Forgot User Password 
-  * @param emailId, newPasswordHash, oldpasswordHash
+  * @param emailId, newPasswordHash
   * @return Boolean 
   */
   @Mutation(() => Boolean, { name: 'UpdateForgotUserPassword' })

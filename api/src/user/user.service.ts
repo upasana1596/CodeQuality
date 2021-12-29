@@ -29,6 +29,7 @@ export class UserService {
     createdUser.verification_code = verification_code;
     return createdUser.save();
   }
+
   /**
   * Find User By ID
   * @param id 
@@ -126,6 +127,7 @@ export class UserService {
         const newPassword = await appHashPassword(passwordHash);
         user.passwordHash = newPassword;
         await user.save();
+        console.log(user,"updated user")
         return true;
       } else {
         return false;
@@ -140,18 +142,18 @@ export class UserService {
   * @param email,passwordHash,oldpasswordHash
   * @return Boolean
   */ 
-    async updateForgotUserPassword(
-      email: string,
-      passwordHash: string,
-    ): Promise<any> {
-      const user = await this.userModel.findOne({ email });
-      if (user) {
-          const newPassword = await appHashPassword(passwordHash);
-          user.passwordHash = newPassword;
-          await user.save();
-          return true;
-      } else {
-        return false;
-      }
+  async updateForgotUserPassword(
+    email: string,
+    passwordHash: string,
+  ): Promise<any> {
+    const user = await this.userModel.findOne({ email });
+    if (user) {
+        const newPassword = await appHashPassword(passwordHash);
+        user.passwordHash = newPassword;
+        await user.save();
+        return true;
+    } else {
+      return false;
     }
+  }
 }
