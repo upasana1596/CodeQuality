@@ -21,7 +21,7 @@ export class AuthResolver {
     * Get All Users Info. 
     * @return users information.
     */
-    @UseGuards(GqlAuthGuard)
+    // @UseGuards(GqlAuthGuard)
     @Query(() => [UserDto], { name: 'GetAllUsers' })
     async getAllUsers() {
         return this.userService.findAll();
@@ -34,6 +34,7 @@ export class AuthResolver {
     */
     @Mutation(() => Boolean, { name: 'SignUp' })
     async signUp(@Args('input') input: UserInput) {
+      console.log("test")
       const email = await this.checkIfEmailExists(input.email);
       const verification_code = uuid();
       if(!email){

@@ -1,17 +1,11 @@
-
-
-# mutation SignUp($input: UserInput!
-# ) {
-#   SignUp(input:$input
-#   ) {
-#     id
-#   }
+# query 
+#   GetAllUsers{
+# 		id
+#     first_name
 # }
-# mutation{
-#   SignUp(input:{
-#     first_name:"Unati"
-#     last_name:"Naidu"
-#     email:"vmod@topdevazh.com"
-#     mobile_no:7405888051
-#   })
-# }
+
+query Login($input: SignInInput!) {
+  Login(SignInInput: $input){
+    user
+  }
+}

@@ -8,6 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddUserComponent } from 'src/registerUser/add-user.component';
 import { GraphQLModule } from './graphql.module';
+import { ListUserComponent } from 'src/registerUser/list-users.component';
+import { MatTableModule } from '@angular/material/table';
+import { LoginUserComponent } from './loginUser/login-user.component';
 
 
 @NgModule({
@@ -15,6 +18,8 @@ import { GraphQLModule } from './graphql.module';
     AppComponent,
     NavbarComponent,
     AddUserComponent,
+    ListUserComponent,
+    LoginUserComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,8 @@ import { GraphQLModule } from './graphql.module';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    GraphQLModule
+    GraphQLModule,
+    MatTableModule 
 
   ],
   providers: [],

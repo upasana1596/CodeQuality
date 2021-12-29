@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
@@ -20,8 +20,10 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   CompleteUserAccountProcess: Scalars['Boolean'];
+  DeleteUser: UserDto;
   SendEmail: UserDto;
   SignUp: Scalars['Boolean'];
+  UpdateUser: UserDto;
 };
 
 
@@ -29,6 +31,11 @@ export type MutationCompleteUserAccountProcessArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
   status: Scalars['Float'];
+};
+
+
+export type MutationDeleteUserArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -42,10 +49,18 @@ export type MutationSignUpArgs = {
   input: UserInput;
 };
 
+
+export type MutationUpdateUserArgs = {
+  id: Scalars['String'];
+  input: UserInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   GetAllUsers: Array<UserDto>;
   GetUserByID: UserDto;
+  Login: SigninDto;
+  SendForgotPasswordReq: Scalars['Boolean'];
   checkIfEmailExists: Scalars['Boolean'];
   verifyAuthCode: Scalars['Boolean'];
 };
@@ -53,6 +68,16 @@ export type Query = {
 
 export type QueryGetUserByIdArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryLoginArgs = {
+  signinInput: SignInInput;
+};
+
+
+export type QuerySendForgotPasswordReqArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -66,10 +91,21 @@ export type QueryVerifyAuthCodeArgs = {
   verificationCode: Scalars['String'];
 };
 
+export type SignInInput = {
+  email: Scalars['String'];
+  passwordHash?: InputMaybe<Scalars['String']>;
+};
+
+export type SigninDto = {
+  __typename?: 'SigninDto';
+  accessToken: Scalars['String'];
+  user: UserDto;
+};
+
 export type UserDto = {
   __typename?: 'UserDto';
   createdAt?: Maybe<Scalars['DateTime']>;
-  email: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
   first_name: Scalars['String'];
   id: Scalars['ID'];
   last_name: Scalars['String'];
@@ -107,8 +143,7 @@ export const SignUpDocument = gql`
     providedIn: 'root'
   })
   export class SignUpGQL extends Apollo.Mutation<SignUpMutation, SignUpMutationVariables> {
-    [x: string]: any;
-    override document = SignUpDocument;
+     override document = SignUpDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
