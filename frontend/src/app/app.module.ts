@@ -10,10 +10,9 @@ import { GraphQLModule } from './graphql.module';
 import { ListUserComponent } from 'src/registerUser/list-users.component';
 import { MatTableModule } from '@angular/material/table';
 import { LoginUserComponent } from './loginUser/login-user.component';
-import { UserComponent } from './user/user.component';
-import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     AddUserComponent,
     ListUserComponent,
-    LoginUserComponent
+    LoginUserComponent,
     UserComponent,
   ],
   imports: [
@@ -31,7 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     RouterModule,
     GraphQLModule,
-    MatTableModule 
+    MatTableModule,
     BrowserAnimationsModule,
     MatPaginatorModule
   ],
