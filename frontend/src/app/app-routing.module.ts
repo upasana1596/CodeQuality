@@ -4,12 +4,15 @@ import { NavbarComponent } from 'src/navbar/navbar.component';
 import { AddUserComponent } from 'src/registerUser/add-user.component';
 import { ListUserComponent } from 'src/registerUser/list-users.component';
 import { LoginUserComponent } from './loginUser/login-user.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   { path: '', component: NavbarComponent },
   { path: 'addUser', component:AddUserComponent },
+
   { path: 'listUser', component:ListUserComponent },
   { path: 'login', component:LoginUserComponent }
+  { path: 'user', component:UserComponent }
 ];
 
 @NgModule({

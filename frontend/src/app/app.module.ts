@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NavbarComponent } from 'src/navbar/navbar.component';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +10,10 @@ import { GraphQLModule } from './graphql.module';
 import { ListUserComponent } from 'src/registerUser/list-users.component';
 import { MatTableModule } from '@angular/material/table';
 import { LoginUserComponent } from './loginUser/login-user.component';
-
+import { UserComponent } from './user/user.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { LoginUserComponent } from './loginUser/login-user.component';
     AddUserComponent,
     ListUserComponent,
     LoginUserComponent
+    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +32,11 @@ import { LoginUserComponent } from './loginUser/login-user.component';
     RouterModule,
     GraphQLModule,
     MatTableModule 
-
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[ MatTableModule,MatPaginatorModule ]
 })
 export class AppModule { }
