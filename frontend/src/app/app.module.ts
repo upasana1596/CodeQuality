@@ -13,6 +13,8 @@ import { LoginUserComponent } from './loginUser/login-user.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserComponent } from './user/user.component';
+import { ForgotPasswordComponent } from './forgotPassword/forgot-password.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { UserComponent } from './user/user.component';
     ListUserComponent,
     LoginUserComponent,
     UserComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { UserComponent } from './user/user.component';
     GraphQLModule,
     MatTableModule,
     BrowserAnimationsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlashMessagesModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

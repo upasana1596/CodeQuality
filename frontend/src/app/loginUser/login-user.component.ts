@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 const Login = gql`
-  query Login($input: SignInInput!) {
-    Login(input: $input){
+  query Login($input: SignInInput) {
+    Login(signinInput: $input){
       user{
         id
       }
@@ -26,9 +26,10 @@ export class LoginUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern]],
       passwordHash: ['', Validators.required],
     });
-    console.log("this.loginForm",this.loginForm.value)
+    
   }
   onSubmit() {
+    console.log("this.loginForm",this.loginForm.value)
     this.submitted = true;
     this.apollo
       .watchQuery<unknown>({
