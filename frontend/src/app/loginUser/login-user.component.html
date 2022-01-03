@@ -3,7 +3,7 @@
     <div ng-app="myApp" ng-controller="myController" class="container login-container z-index">
       <div class="card-container">
         <!-- <div class="text-center mb-2"><img src="assets/images/logo.png" class="logo" alt="Responsive image" /></div> -->
-        <p class="welcome-text">Welcome to BeeHive!</p> 
+        <p class="welcome-text">Welcome to CodeQuality!</p> 
         <!-- <div class="row">
           <div class="col-3"></div>
           <div  *ngIf="signedIn" class="col-6 alert alert-success" role="alert" style="width: 50%; text-align: center;">
@@ -41,10 +41,10 @@
                   <div *ngIf="validate.passwordHash.errors?.required" class="validate-field">passwordHash is required.</div>
               </div>
           </fieldset>
-          <!-- <div class="forgot-sec">
+          <div class="forgot-sec">
             <a routerLink="/forgot-email" class="forgot-passwordHash">Forgot Username?</a> <span class="dot"></span>
-            <a routerLink="/forgot-passwordHash" class="forgot-passwordHash">Forgot passwordHash?</a>
-          </div> -->
+            <a routerLink="/forgot-passwor" class="forgot-passwordHash">Forgot password?</a>
+          </div>
           <!-- <div class="app-system-info">v{{systemInfo.APP_VERSION}} ({{systemInfo.APP_GIT_HASH}})</div> -->
           
           <button class="btn btn-primary btn-block yellow-btn" (click)="onSubmit()" type="submit">Sign In</button>

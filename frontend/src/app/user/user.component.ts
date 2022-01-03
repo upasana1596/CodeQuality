@@ -1,6 +1,14 @@
 import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-
+import { Apollo, gql } from 'apollo-angular';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+const GetAllUsers= gql`query{
+  GetAllUsers{
+		id
+    first_name
+    last_name
+    email
+  }
+}`;
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -33,9 +41,15 @@ export class UserComponent implements OnInit {
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-  constructor() { }
+  constructor(private apollo:Apollo) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {this.apollo
+    .watchQuery({
+      query: GetAllUsers
+    })
+    .valueChanges.subscribe((data:any) => {
+      this.dataSource= data.data.GetAllUsers;
+    });
   }
 
 }
