@@ -16,19 +16,19 @@
             <div class="row">
                 <div class="col-md-6">
                     <fieldset class="form-group">
-                        <input type="text" required class="inp_1" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && validateUser.firstName.errors }" placeholder=" "/>
+                        <input type="text" required class="inp_1" formControlName="first_name" [ngClass]="{ 'is-invalid': submitted && validateUser.first_name.errors }" placeholder=" "/>
                         <label>First Name</label>     
-                        <div *ngIf="submitted && validateUser.firstName.errors" class="invalid-feedback">
-                            <div *ngIf="validateUser.firstName.errors.required">First Name is required</div>
+                        <div *ngIf="submitted && validateUser.first_name.errors" class="invalid-feedback">
+                            <div *ngIf="validateUser.first_name.errors.required">First Name is required</div>
                         </div>                   
                     </fieldset>
                 </div>
                 <div class="col-md-6">
                     <fieldset class="form-group">
-                        <input type="text" required class="inp_1" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && validateUser.lastName.errors }" placeholder=" "/>                        
+                        <input type="text" required class="inp_1" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && validateUser.last_name.errors }" placeholder=" "/>                        
                         <label>Last Name</label>   
-                        <div *ngIf="submitted && validateUser.lastName.errors" class="invalid-feedback">
-                            <div *ngIf="validateUser.lastName.errors.required">Last Name is required</div>
+                        <div *ngIf="submitted && validateUser.last_name.errors" class="invalid-feedback">
+                            <div *ngIf="validateUser.last_name.errors.required">Last Name is required</div>
                         </div>                     
                     </fieldset>
                 </div>
@@ -42,13 +42,20 @@
                 </div> 
             </fieldset> 
             <fieldset class="form-group">
-                <input type="text" required class="inp_1" formControlName="mobileNumber" [ngClass]="{ 'is-invalid': submitted && validateUser.mobileNumber.errors }" placeholder=" "/>
+                <input type="text" required class="inp_1" formControlName="mobile_no" [ngClass]="{ 'is-invalid': submitted && validateUser.mobile_no.errors }" placeholder=" "/>
                 <label>Mobile Number</label>     
-                <div *ngIf="submitted && validateUser.mobileNumber.errors" class="invalid-feedback">
-                    <div *ngIf="validateUser.mobileNumber.errors.required">Mobile Number is required</div>
+                <div *ngIf="submitted && validateUser.mobile_no.errors" class="invalid-feedback">
+                    <div *ngIf="validateUser.mobile_no.errors.required">Mobile Number is required</div>
                 </div>                   
             </fieldset>
         </div>
+        <!-- <mat-list>
+            <mat-list-item >
+              <h3 matLine> </h3>
+              <p matLine> test </p>
+              <p matLine class="demo-2"> </p>
+            </mat-list-item>
+          </mat-list> -->
     </form>
 </div>
 <router-outlet></router-outlet>

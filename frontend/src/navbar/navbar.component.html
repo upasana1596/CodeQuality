@@ -1,18 +1,24 @@
 <ng-container>
-    <nav class="navbar navbar-light navbar-expand-sm navbar-bg">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-bg">
+        <div class="d-flex w-25 order-0">
+            <img src="assets/images/logo.png" class="logo" alt="Responsive image" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         <div class="navbar-collapse collapse justify-content-center order-2 w-50" id="collapsingNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="/dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="/addUser">Add User</a>
+                    <a class="nav-link" routerLink="/users">Users</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="/login">Login</a>
                 </li>
             </ul>
         </div>
     </nav>
-    
 </ng-container>
+    

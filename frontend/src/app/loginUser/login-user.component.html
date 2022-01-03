@@ -1,0 +1,56 @@
+
+<div class="body">
+    <div ng-app="myApp" ng-controller="myController" class="container login-container z-index">
+      <div class="card-container">
+        <!-- <div class="text-center mb-2"><img src="assets/images/logo.png" class="logo" alt="Responsive image" /></div> -->
+        <p class="welcome-text">Welcome to CodeQuality!</p> 
+        <!-- <div class="row">
+          <div class="col-3"></div>
+          <div  *ngIf="signedIn" class="col-6 alert alert-success" role="alert" style="width: 50%; text-align: center;">
+            Logged In successfully.
+          </div>        
+          <div class="col-3"></div>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-3"></div>
+          <div *ngIf="!userExist" class="alert alert-danger" role="alert" style="width: 50%; text-align: center;">
+            User does not exist.
+            <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="col-3"></div>
+        </div> -->
+        <form  [formGroup]="loginForm"  class="from-white">
+          <h2 class="mb-3">Sign In</h2>
+          <!-- <div class="flash-message-display">
+            <flash-messages></flash-messages>
+          </div> -->
+          <fieldset class="form-group">
+              <input required  formControlName="email" type="text"  id="email" autocomplete="off" class="inp_1" [ngClass]="{ 'is-invalid': submitted && validate.email.errors }"  placeholder=" ">
+              <label>Email</label>
+              <div class="error-sec" *ngIf="submitted && validate.email.errors">
+                  <div *ngIf="validate.email.errors?.required" class="validate-field">Email is required.</div>
+              </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <!-- <img src="assets/images/view-icon.svg" class="view-icon"/> -->
+              <input required formControlName="passwordHash"  type="passwordHash"   class="inp_1" id="passwordHash" autocomplete="off" placeholder=" ">
+              <label for="passwordHash">Password</label>
+              <div class="error-sec" *ngIf="submitted && validate.passwordHash.errors ">
+                  <div *ngIf="validate.passwordHash.errors?.required" class="validate-field">Password is required.</div>
+              </div>
+          </fieldset>
+          <div class="forgot-sec">
+            <a routerLink="/forgot-email" class="forgot-passwordHash">Forgot Username?</a> <span class="dot"></span>
+            <a routerLink="/forgotPassword" class="forgot-passwordHash">Forgot password?</a>
+          </div>
+          <!-- <div class="app-system-info">v{{systemInfo.APP_VERSION}} ({{systemInfo.APP_GIT_HASH}})</div> -->
+          
+          <button class="btn btn-primary btn-block yellow-btn" (click)="onSubmit()" type="submit">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  

@@ -1,0 +1,14 @@
+# query 
+#   GetAllUsers{
+# 		id
+#     first_name
+# }
+
+query Login($input: SignInInput!) {
+  Login(signinInput: $input){
+    user{
+      id
+      email
+    }
+  }
+}
