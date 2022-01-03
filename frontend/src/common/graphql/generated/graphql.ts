@@ -23,6 +23,8 @@ export type Mutation = {
   DeleteUser: UserDto;
   SendEmail: UserDto;
   SignUp: Scalars['Boolean'];
+  UpdateForgotUserPassword: Scalars['Boolean'];
+  UpdateResetUserPassword: Scalars['Boolean'];
   UpdateUser: UserDto;
 };
 
@@ -50,6 +52,19 @@ export type MutationSignUpArgs = {
 };
 
 
+export type MutationUpdateForgotUserPasswordArgs = {
+  email: Scalars['String'];
+  newPasswordHash: Scalars['String'];
+};
+
+
+export type MutationUpdateResetUserPasswordArgs = {
+  email: Scalars['String'];
+  newPasswordHash: Scalars['String'];
+  oldpasswordHash: Scalars['String'];
+};
+
+
 export type MutationUpdateUserArgs = {
   id: Scalars['String'];
   input: UserInput;
@@ -60,7 +75,8 @@ export type Query = {
   GetAllUsers: Array<UserDto>;
   GetUserByID: UserDto;
   Login: SigninDto;
-  SendForgotPasswordReq: Scalars['Boolean'];
+  SendForgotPasswordRequest: Scalars['Boolean'];
+  SendResetPasswordRequest: Scalars['Boolean'];
   checkIfEmailExists: Scalars['Boolean'];
   verifyAuthCode: Scalars['Boolean'];
 };
@@ -76,7 +92,12 @@ export type QueryLoginArgs = {
 };
 
 
-export type QuerySendForgotPasswordReqArgs = {
+export type QuerySendForgotPasswordRequestArgs = {
+  email: Scalars['String'];
+};
+
+
+export type QuerySendResetPasswordRequestArgs = {
   email: Scalars['String'];
 };
 
@@ -133,6 +154,13 @@ export type SignUpMutationVariables = Exact<{
 
 export type SignUpMutation = { __typename?: 'Mutation', SignUp: boolean };
 
+export type LoginQueryVariables = Exact<{
+  input: SignInInput;
+}>;
+
+
+export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', user: { __typename?: 'UserDto', id: string, email?: string | null | undefined } } };
+
 export const SignUpDocument = gql`
     mutation SignUp($input: UserInput!) {
   SignUp(input: $input)
@@ -143,7 +171,28 @@ export const SignUpDocument = gql`
     providedIn: 'root'
   })
   export class SignUpGQL extends Apollo.Mutation<SignUpMutation, SignUpMutationVariables> {
-     override document = SignUpDocument;
+    override document = SignUpDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LoginDocument = gql`
+    query Login($input: SignInInput!) {
+  Login(signinInput: $input) {
+    user {
+      id
+      email
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
+    override document = LoginDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -5,7 +5,10 @@
 # }
 
 query Login($input: SignInInput!) {
-  Login(SignInInput: $input){
-    user
+  Login(signinInput: $input){
+    user{
+      id
+      email
+    }
   }
 }
