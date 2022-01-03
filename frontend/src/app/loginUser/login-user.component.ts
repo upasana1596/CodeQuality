@@ -2,17 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 import { LoginGQL } from 'src/common/graphql/generated/graphql';
-const Login = gql`
-  query Login($signinInput: SignInInput!) {
-    Login(signinInput: $signinInput){
-      user{
-        id
-      }
-    }
-  }
-`;
+
 @Component({
-  // selector: 'app-root',
   templateUrl: './login-user.component.html',
   styleUrls: ['./login-user.component.scss'],
 })
@@ -47,7 +38,7 @@ export class LoginUserComponent implements OnInit {
     //     console.log('_data', _data);
     //   });
   }
- get validate() {
+  get validate() {
     return this.loginForm.controls;
   }
 }

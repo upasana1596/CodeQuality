@@ -66,8 +66,11 @@ export type MutationUpdateResetUserPasswordArgs = {
 
 
 export type MutationUpdateUserArgs = {
+  email?: InputMaybe<Scalars['String']>;
+  first_name?: InputMaybe<Scalars['String']>;
   id: Scalars['String'];
-  input: UserInput;
+  last_name?: InputMaybe<Scalars['String']>;
+  mobile_no?: InputMaybe<Scalars['Float']>;
 };
 
 export type Query = {
@@ -127,10 +130,10 @@ export type UserDto = {
   __typename?: 'UserDto';
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
-  first_name: Scalars['String'];
+  first_name?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  last_name: Scalars['String'];
-  mobile_no: Scalars['Float'];
+  last_name?: Maybe<Scalars['String']>;
+  mobile_no?: Maybe<Scalars['Float']>;
   passwordHash?: Maybe<Scalars['String']>;
   status_code?: Maybe<Scalars['Float']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -138,10 +141,10 @@ export type UserDto = {
 };
 
 export type UserInput = {
-  email: Scalars['String'];
-  first_name: Scalars['String'];
+  email?: InputMaybe<Scalars['String']>;
+  first_name?: InputMaybe<Scalars['String']>;
   last_name: Scalars['String'];
-  mobile_no: Scalars['Float'];
+  mobile_no?: InputMaybe<Scalars['Float']>;
   passwordHash?: InputMaybe<Scalars['String']>;
   status_code?: InputMaybe<Scalars['Float']>;
   verification_code?: InputMaybe<Scalars['String']>;
@@ -154,12 +157,35 @@ export type SignUpMutationVariables = Exact<{
 
 export type SignUpMutation = { __typename?: 'Mutation', SignUp: boolean };
 
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
+  email: Scalars['String'];
+  mobile_no: Scalars['Float'];
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', UpdateUser: { __typename?: 'UserDto', last_name?: string | null | undefined, first_name?: string | null | undefined, email?: string | null | undefined } };
+
+export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllUsersQuery = { __typename?: 'Query', GetAllUsers: Array<{ __typename?: 'UserDto', id: string, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined }> };
+
 export type LoginQueryVariables = Exact<{
   input: SignInInput;
 }>;
 
 
 export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', user: { __typename?: 'UserDto', id: string, email?: string | null | undefined } } };
+
+export type GetUserByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetUserByIdQuery = { __typename?: 'Query', GetUserByID: { __typename?: 'UserDto', first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, passwordHash?: string | null | undefined, mobile_no?: number | null | undefined } };
 
 export const SignUpDocument = gql`
     mutation SignUp($input: UserInput!) {
@@ -172,6 +198,53 @@ export const SignUpDocument = gql`
   })
   export class SignUpGQL extends Apollo.Mutation<SignUpMutation, SignUpMutationVariables> {
     override document = SignUpDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($id: String!, $first_name: String!, $last_name: String!, $email: String!, $mobile_no: Float!) {
+  UpdateUser(
+    id: $id
+    first_name: $first_name
+    last_name: $last_name
+    email: $email
+    mobile_no: $mobile_no
+  ) {
+    last_name
+    first_name
+    email
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
+    override document = UpdateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetAllUsersDocument = gql`
+    query GetAllUsers {
+  GetAllUsers {
+    id
+    first_name
+    last_name
+    email
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetAllUsersGQL extends Apollo.Query<GetAllUsersQuery, GetAllUsersQueryVariables> {
+    override document = GetAllUsersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -193,6 +266,28 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
     override document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetUserByIdDocument = gql`
+    query GetUserByID($id: String!) {
+  GetUserByID(id: $id) {
+    first_name
+    last_name
+    email
+    passwordHash
+    mobile_no
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetUserByIdGQL extends Apollo.Query<GetUserByIdQuery, GetUserByIdQueryVariables> {
+    override document = GetUserByIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

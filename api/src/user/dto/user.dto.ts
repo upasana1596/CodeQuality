@@ -5,16 +5,16 @@ export class UserDto {
   @Field(() => ID)
   id?: string;
 
-  @Field(() => String)
+  @Field(() => String,{nullable : true})
   first_name: string;
   
-  @Field(() => String)
+  @Field(() => String,{nullable : true})
   last_name: string;
 
   @Field(() => String,{nullable : true})
   email: string;
 
-  @Field(() => Number)
+  @Field(() => Number,{nullable : true})
   mobile_no: number;
 
   @Field(() => String,{nullable : true})

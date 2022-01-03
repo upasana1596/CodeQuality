@@ -1,8 +1,11 @@
-# query 
-#   GetAllUsers{
-# 		id
-#     first_name
-# }
+query GetAllUsers{
+  GetAllUsers{
+		id
+    first_name
+    last_name
+    email
+  }
+}  
 
 query Login($input: SignInInput!) {
   Login(signinInput: $input){
@@ -10,5 +13,15 @@ query Login($input: SignInInput!) {
       id
       email
     }
+  }
+}
+
+query GetUserByID ($id: String!){
+  GetUserByID (id: $id){
+    first_name
+    last_name
+    email
+    passwordHash
+    mobile_no
   }
 }

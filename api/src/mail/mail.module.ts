@@ -11,8 +11,8 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
         host: 'smtp.zoho.com',
         secure: false,
         auth: {
-          user: 'varsha@appsvolt.com',
-          pass: 'appsvoltzoho84',
+          user: 'upasna@appsvolt.com',
+          pass: 'upasana2315',
         },
       },
       defaults: {

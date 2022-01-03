@@ -3,3 +3,10 @@ mutation SignUp($input: UserInput!
   SignUp(input:$input
   )
 }
+mutation UpdateUser($id:String!,$first_name:String!,$last_name:String!,$email:String!,$mobile_no:Float!){
+  UpdateUser(id:$id,first_name:$first_name,last_name:$last_name,email:$email,mobile_no:$mobile_no){
+    last_name
+    first_name
+    email
+  }
+}

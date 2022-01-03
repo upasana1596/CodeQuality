@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Float, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { appComparePasswords, appHashPassword } from 'src/crypto/crypto.util';
 import { MailService } from 'src/mail/mail.service';
 import { UserDto } from 'src/user/dto/user.dto';
@@ -75,7 +75,7 @@ export class AuthResolver {
   * @param id user ID
   * @return user information.
   */
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   @Query(() => UserDto, { name: 'GetUserByID' })
   async getUserById( @Args('id') id: string) {
     return this.userService.findOne(id);
@@ -154,8 +154,12 @@ export class AuthResolver {
   * @return user Information 
   */
   @Mutation(() => UserDto, { name: 'UpdateUser' })
-  async UpdateUser(@Args('id') id: string,@Args('input') input: UserInput) : Promise<UserDto>{
-    const user = await this.userService.updateUser(id,input);
+  async UpdateUser(@Args('id') id: string,
+  @Args('first_name' , { type: () => String , nullable: true}) first_name: string,
+  @Args('last_name' , { type: () => String , nullable: true}) last_name: string,
+  @Args('email' , { type: () => String, nullable: true }) email: string,
+  @Args('mobile_no', { type: () => Float, nullable: true}) mobile_no: number) : Promise<UserDto>{
+    const user = await this.userService.updateUser(id,first_name,last_name,email,mobile_no);
     return user;
   }
 

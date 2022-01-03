@@ -1,3 +1,28 @@
 table {
-    width: 100%;
+  width: 100%;
+}
+.user-list{
+  .main-heading{overflow:hidden;margin-bottom:30px;width:100%;margin-top:0;
+    span{margin-top:11px;float:left}
+    // .invite-user-btn:hover{color:#fff;text-decoration:none;}
+    .add-user-btn{
+      border: none;
+      border-radius: 29px;
+      background-color: #0404e3ab;
+      color: white;
+      float:right;
+      padding:0 30px;
+      width:auto;
+      height:56px;
+      line-height:56px;
+      margin-top:0
+    }
   }
+  // .mat-elevation-z8{
+  //   box-shadow: none !important;
+  // }
+  .mat-paginator {
+    display: block;
+    margin-top: 5px;
+  }
+}     
