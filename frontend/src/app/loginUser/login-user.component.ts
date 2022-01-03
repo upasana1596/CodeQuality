@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 import { LoginGQL } from 'src/common/graphql/generated/graphql';
 const Login = gql`
-  query Login($input: SignInInput) {
-    Login(signinInput: $input){
+  query Login($signinInput: SignInInput!) {
+    Login(signinInput: $signinInput){
       user{
         id
       }

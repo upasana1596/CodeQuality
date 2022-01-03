@@ -11,10 +11,12 @@ import { ListUserComponent } from 'src/registerUser/list-users.component';
 import { MatTableModule } from '@angular/material/table';
 import { LoginUserComponent } from './loginUser/login-user.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserComponent } from './user/user.component';
 import { ForgotPasswordComponent } from './forgotPassword/forgot-password.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     MatTableModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
+    MatIconModule,
+    MatToolbarModule,
     FlashMessagesModule.forRoot(),
   ],
   providers: [],

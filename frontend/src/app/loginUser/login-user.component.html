@@ -34,16 +34,16 @@
               </div>
           </fieldset>
           <fieldset class="form-group">
-            <img src="assets/images/view-icon.svg" class="view-icon"/>
+            <!-- <img src="assets/images/view-icon.svg" class="view-icon"/> -->
               <input required formControlName="passwordHash"  type="passwordHash"   class="inp_1" id="passwordHash" autocomplete="off" placeholder=" ">
-              <label for="passwordHash">passwordHash</label>
+              <label for="passwordHash">Password</label>
               <div class="error-sec" *ngIf="submitted && validate.passwordHash.errors ">
-                  <div *ngIf="validate.passwordHash.errors?.required" class="validate-field">passwordHash is required.</div>
+                  <div *ngIf="validate.passwordHash.errors?.required" class="validate-field">Password is required.</div>
               </div>
           </fieldset>
           <div class="forgot-sec">
             <a routerLink="/forgot-email" class="forgot-passwordHash">Forgot Username?</a> <span class="dot"></span>
-            <a routerLink="/forgot-passwor" class="forgot-passwordHash">Forgot password?</a>
+            <a routerLink="/forgotPassword" class="forgot-passwordHash">Forgot password?</a>
           </div>
           <!-- <div class="app-system-info">v{{systemInfo.APP_VERSION}} ({{systemInfo.APP_GIT_HASH}})</div> -->
           
