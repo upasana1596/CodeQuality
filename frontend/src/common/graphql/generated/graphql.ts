@@ -174,7 +174,7 @@ export type LoginQueryVariables = Exact<{
 }>;
 
 
-export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', user: { __typename?: 'UserDto', id: string, email?: string | null | undefined } } };
+export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', accessToken: string, user: { __typename?: 'UserDto', id: string, email?: string | null | undefined } } };
 
 export type GetUserByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -254,6 +254,7 @@ export const GetAllUsersDocument = gql`
 export const LoginDocument = gql`
     query Login($input: SignInInput!) {
   Login(signinInput: $input) {
+    accessToken
     user {
       id
       email

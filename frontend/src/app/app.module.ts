@@ -17,6 +17,7 @@ import { ForgotPasswordComponent } from './forgotPassword/forgot-password.compon
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UpdateUsersComponent } from './update-users/update-users.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { UpdateUsersComponent } from './update-users/update-users.component';
     MatToolbarModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   exports:[ MatTableModule,MatPaginatorModule ]
 })

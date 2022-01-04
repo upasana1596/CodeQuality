@@ -9,6 +9,7 @@ query GetAllUsers{
 
 query Login($input: SignInInput!) {
   Login(signinInput: $input){
+    accessToken
     user{
       id
       email
