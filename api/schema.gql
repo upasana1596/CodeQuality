@@ -41,21 +41,11 @@ input SignInInput {
 }
 
 type Mutation {
-  SignUp(input: UserInput!): Boolean!
+  SignUp(mobile_no: Float, email: String, last_name: String, first_name: String): Boolean!
   SendEmail(verification_code: String!, emailId: String!): UserDto!
   CompleteUserAccountProcess(password: String!, status: Float!, email: String!): Boolean!
   DeleteUser(id: String!): UserDto!
   UpdateUser(mobile_no: Float, email: String, last_name: String, first_name: String, id: String!): UserDto!
   UpdateResetUserPassword(oldpasswordHash: String!, newPasswordHash: String!, email: String!): Boolean!
   UpdateForgotUserPassword(newPasswordHash: String!, email: String!): Boolean!
-}
-
-input UserInput {
-  first_name: String
-  last_name: String!
-  mobile_no: Float
-  email: String
-  status_code: Float
-  verification_code: String
-  passwordHash: String
 }

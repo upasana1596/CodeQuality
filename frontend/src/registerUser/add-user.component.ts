@@ -34,20 +34,14 @@ export class AddUserComponent implements OnInit {
   }
   createNewUser() {
     this.submitted = true;
-    // let Form = JSON.stringify(this.userForm.value);
     console.log(" this.userForm.value", this.userForm.value)
-    // this.apollo
-    //   .mutate({
-    //     mutation: createUser,
-    //     variables: {
-    //       input: this.userForm.value,
-    //     },
-    //   }).subscribe((data: any) => {
-    //     console.log("data",data)
-    //   })
-    this.signUpGQL.mutate({ input:  this.userForm.value })
+    const firstName = this.userForm.value.first_name;
+    const lastName = this.userForm.value.last_name;
+    const mobileNo = Number(this.userForm.value.mobile_no);
+    const email = this.userForm.value.email;
+    this.signUpGQL.mutate({ first_name:  firstName,last_name:lastName,email:email,mobile_no:mobileNo })
       .subscribe((_data: unknown) => {
         console.log("_data",_data)
-      });
+    });
   }
 }

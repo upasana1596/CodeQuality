@@ -23,9 +23,13 @@ export class UserService {
   * @param UserInput,verification_code 
   * @return users information.
   */
-  async create(userInput: UserInput,verification_code:string): Promise<UserDto> {
-    const createdUser = new this.userModel(userInput);
+  async create(first_name: string,last_name: string,mobile:number,email:string,verification_code:string): Promise<UserDto> {
+    const createdUser = new this.userModel();
     createdUser.status_code = 0;
+    createdUser.first_name = first_name;
+    createdUser.last_name = last_name;
+    createdUser.email = email;
+    createdUser.mobile_no = mobile;
     createdUser.verification_code = verification_code;
     return createdUser.save();
   }

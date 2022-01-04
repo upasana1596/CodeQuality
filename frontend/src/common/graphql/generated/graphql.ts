@@ -48,7 +48,10 @@ export type MutationSendEmailArgs = {
 
 
 export type MutationSignUpArgs = {
-  input: UserInput;
+  email?: InputMaybe<Scalars['String']>;
+  first_name?: InputMaybe<Scalars['String']>;
+  last_name?: InputMaybe<Scalars['String']>;
+  mobile_no?: InputMaybe<Scalars['Float']>;
 };
 
 
@@ -140,18 +143,11 @@ export type UserDto = {
   verification_code?: Maybe<Scalars['String']>;
 };
 
-export type UserInput = {
-  email?: InputMaybe<Scalars['String']>;
-  first_name?: InputMaybe<Scalars['String']>;
-  last_name: Scalars['String'];
-  mobile_no?: InputMaybe<Scalars['Float']>;
-  passwordHash?: InputMaybe<Scalars['String']>;
-  status_code?: InputMaybe<Scalars['Float']>;
-  verification_code?: InputMaybe<Scalars['String']>;
-};
-
 export type SignUpMutationVariables = Exact<{
-  input: UserInput;
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
+  email: Scalars['String'];
+  mobile_no: Scalars['Float'];
 }>;
 
 
@@ -188,8 +184,13 @@ export type GetUserByIdQueryVariables = Exact<{
 export type GetUserByIdQuery = { __typename?: 'Query', GetUserByID: { __typename?: 'UserDto', first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, passwordHash?: string | null | undefined, mobile_no?: number | null | undefined } };
 
 export const SignUpDocument = gql`
-    mutation SignUp($input: UserInput!) {
-  SignUp(input: $input)
+    mutation SignUp($first_name: String!, $last_name: String!, $email: String!, $mobile_no: Float!) {
+  SignUp(
+    first_name: $first_name
+    last_name: $last_name
+    email: $email
+    mobile_no: $mobile_no
+  )
 }
     `;
 
