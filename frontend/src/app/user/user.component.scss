@@ -2,9 +2,10 @@ table {
   width: 100%;
 }
 .user-list{
+  margin-top: 40px;
+  margin-bottom: 30px;
   .main-heading{overflow:hidden;margin-bottom:30px;width:100%;margin-top:0;
     span{margin-top:11px;float:left}
-    // .invite-user-btn:hover{color:#fff;text-decoration:none;}
     .add-user-btn{
       border: none;
       border-radius: 29px;
@@ -18,11 +19,17 @@ table {
       margin-top:0
     }
   }
-  // .mat-elevation-z8{
-  //   box-shadow: none !important;
-  // }
   .mat-paginator {
     display: block;
     margin-top: 5px;
+  }
+  .edit-user{
+    background-color: #0404e3ab;
+    border: none;
+    border-radius: 10px;
+  }
+  .mat-icon{
+    padding-top: 5px;
+    color: white;
   }
 }     

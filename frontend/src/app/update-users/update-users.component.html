@@ -1,15 +1,14 @@
 <div class="container">
     <form class="add-user-page" [formGroup]="updateUserForm" >
         <div class="w-100 pull-left">
-            <h2 class="main-heading">New User</h2>
+            <h2 class="main-heading">Edit User</h2>
             <div class="pull-right">
-                <a routerLink="/users" class="cancel btn">Cancel</a> 
-                <button class="send-invite yellow-btn" (click)="updateUserDetails()" type="submit">Edit User</button>
+                <button routerLink="/users" class="cancel btn">Cancel</button> 
+                <button class="edit-user yellow-btn" (click)="updateUserDetails()" type="submit">Edit User</button>
             </div>
         </div>
         <div class="form-section">
             <h4>Basic Information</h4>
-            <p>An email will be delivered to the user’s email address with an invite link to complete the invite process.</p>            
             <div class="row">
                 <div class="col-md-6">
                     <fieldset class="form-group">
