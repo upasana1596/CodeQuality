@@ -1,11 +1,10 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Float, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { appComparePasswords, appHashPassword } from 'src/crypto/crypto.util';
 import { MailService } from 'src/mail/mail.service';
 import { UserDto } from 'src/user/dto/user.dto';
 import { UserInput } from 'src/user/user.input';
 import { UserService } from 'src/user/user.service';
 import { v4 as uuid } from 'uuid';
-import { LocalAuthGuard } from 'src/guards/local-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { User } from 'src/user/schema/user.schema';
 import { GqlAuthGuard } from 'src/guards/gql-auth.guard';
@@ -33,12 +32,16 @@ export class AuthResolver {
   * @return user information.
   */
   @Mutation(() => Boolean, { name: 'SignUp' })
-    async signUp(@Args('input') input: UserInput) {
-    const email = await this.checkIfEmailExists(input.email);
+    async signUp(
+    @Args('first_name' , { type: () => String , nullable: true}) first_name: string,
+    @Args('last_name' , { type: () => String , nullable: true}) last_name: string,
+    @Args('email' , { type: () => String, nullable: true }) email: string,
+    @Args('mobile_no', { type: () => Float, nullable: true}) mobile_no: number) {
+    const emailId = await this.checkIfEmailExists(email);
     const verification_code = uuid();
-    if(!email){
-      const result = await this.SendEmail(input.email,verification_code);
-      await this.userService.create(input,verification_code);
+    if(!emailId){
+      const result = await this.SendEmail(email,verification_code);
+      await this.userService.create(first_name,last_name,mobile_no ,email,verification_code);
       if (result.Status === 200) {
         return true;
       } else {
@@ -75,7 +78,7 @@ export class AuthResolver {
   * @param id user ID
   * @return user information.
   */
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   @Query(() => UserDto, { name: 'GetUserByID' })
   async getUserById( @Args('id') id: string) {
     return this.userService.findOne(id);
@@ -154,8 +157,12 @@ export class AuthResolver {
   * @return user Information 
   */
   @Mutation(() => UserDto, { name: 'UpdateUser' })
-  async UpdateUser(@Args('id') id: string,@Args('input') input: UserInput) : Promise<UserDto>{
-    const user = await this.userService.updateUser(id,input);
+  async UpdateUser(@Args('id') id: string,
+  @Args('first_name' , { type: () => String , nullable: true}) first_name: string,
+  @Args('last_name' , { type: () => String , nullable: true}) last_name: string,
+  @Args('email' , { type: () => String, nullable: true }) email: string,
+  @Args('mobile_no', { type: () => Float, nullable: true}) mobile_no: number) : Promise<UserDto>{
+    const user = await this.userService.updateUser(id,first_name,last_name,email,mobile_no);
     return user;
   }
 

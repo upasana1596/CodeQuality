@@ -1,18 +1,14 @@
 <div class="container">
-    <form class="add-user-page" [formGroup]="userForm" >
+    <form class="add-user-page" [formGroup]="updateUserForm" >
         <div class="w-100 pull-left">
-            <h2 class="main-heading">New User</h2>
+            <h2 class="main-heading">Edit User</h2>
             <div class="pull-right">
                 <button routerLink="/users" class="cancel btn">Cancel</button> 
-                <button class="add-user-btn yellow-btn" (click)="createNewUser()" type="submit">Send Invite</button>
+                <button class="edit-user yellow-btn" (click)="updateUserDetails()" type="submit">Edit User</button>
             </div>
         </div>
         <div class="form-section">
-            <!-- <div class="flash-message-display">
-                <flash-messages></flash-messages>
-              </div>    -->
             <h4>Basic Information</h4>
-            <p>An email will be delivered to the user’s email address with an invite link to complete the invite process.</p>            
             <div class="row">
                 <div class="col-md-6">
                     <fieldset class="form-group">
@@ -49,13 +45,6 @@
                 </div>                   
             </fieldset>
         </div>
-        <!-- <mat-list>
-            <mat-list-item >
-              <h3 matLine> </h3>
-              <p matLine> test </p>
-              <p matLine class="demo-2"> </p>
-            </mat-list-item>
-          </mat-list> -->
     </form>
 </div>
 <router-outlet></router-outlet>

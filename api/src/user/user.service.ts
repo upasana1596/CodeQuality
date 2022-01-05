@@ -23,9 +23,13 @@ export class UserService {
   * @param UserInput,verification_code 
   * @return users information.
   */
-  async create(userInput: UserInput,verification_code:string): Promise<UserDto> {
-    const createdUser = new this.userModel(userInput);
+  async create(first_name: string,last_name: string,mobile:number,email:string,verification_code:string): Promise<UserDto> {
+    const createdUser = new this.userModel();
     createdUser.status_code = 0;
+    createdUser.first_name = first_name;
+    createdUser.last_name = last_name;
+    createdUser.email = email;
+    createdUser.mobile_no = mobile;
     createdUser.verification_code = verification_code;
     return createdUser.save();
   }
@@ -47,7 +51,6 @@ export class UserService {
   async findOneByEmail(emailId:string): Promise<any> {
     const email  = emailId;
     const user = await this.userModel.findOne({ email });
-    console.log(user,"email user")
     if (user) {
       return true;
       } else { 
@@ -100,12 +103,12 @@ export class UserService {
   * @param id,userInput
   * @return user information
   */ 
-  async updateUser(id:string,userInput: UserInput): Promise<any> {
+  async updateUser(id:string, first_name: string, last_name: string,email: string, mobile_no: number): Promise<any> {
     const user = await this.userModel.findOne({ id });
-    user.first_name = userInput.first_name;
-    user.last_name = userInput.last_name;
-    user.status_code = userInput.status_code;
-    user.mobile_no = userInput.mobile_no;
+    user.first_name = first_name;
+    user.last_name = last_name;
+    user.mobile_no = mobile_no;
+    user.email = email;
     const userInfo = user.save();
     return userInfo;
   }

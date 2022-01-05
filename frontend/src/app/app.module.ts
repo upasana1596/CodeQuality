@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddUserComponent } from 'src/registerUser/add-user.component';
 import { GraphQLModule } from './graphql.module';
-import { ListUserComponent } from 'src/registerUser/list-users.component';
 import { MatTableModule } from '@angular/material/table';
 import { LoginUserComponent } from './loginUser/login-user.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -16,23 +15,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserComponent } from './user/user.component';
 import { ForgotPasswordComponent } from './forgotPassword/forgot-password.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { UpdateUsersComponent } from './update-users/update-users.component';
+import { AuthService } from './auth/auth.service';
 import { ResetPasswordComponent } from './resetPassword/reset-password.component';
 import { CompleteAccountComponent } from './completeAccount/complete-account.component';
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     AddUserComponent,
-    ListUserComponent,
     LoginUserComponent,
     UserComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    CompleteAccountComponent
+    CompleteAccountComponent,
+    UpdateUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +47,7 @@ import { CompleteAccountComponent } from './completeAccount/complete-account.com
     MatToolbarModule,
     FlashMessagesModule.forRoot(),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   exports:[ MatTableModule,MatPaginatorModule ]
 })

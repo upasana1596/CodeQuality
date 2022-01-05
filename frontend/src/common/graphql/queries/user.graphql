@@ -1,11 +1,15 @@
-# query 
-#   GetAllUsers{
-# 		id
-#     first_name
-# }
+query GetAllUsers{
+  GetAllUsers{
+		id
+    first_name
+    last_name
+    email
+  }
+}  
 
 query Login($input: SignInInput!) {
   Login(signinInput: $input){
+    accessToken
     user{
         id
         first_name
@@ -21,4 +25,14 @@ SendForgotPasswordRequest(email:$email)
 
 query SendResetPasswordRequest($email: String!){
   SendResetPasswordRequest(email:$email)
+}
+
+query GetUserByID ($id: String!){
+  GetUserByID (id: $id){
+    first_name
+    last_name
+    email
+    passwordHash
+    mobile_no
+  }
 }

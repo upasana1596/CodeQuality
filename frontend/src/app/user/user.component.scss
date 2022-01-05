@@ -1,3 +1,35 @@
 table {
-    width: 100%;
+  width: 100%;
+}
+.user-list{
+  margin-top: 40px;
+  margin-bottom: 30px;
+  .main-heading{overflow:hidden;margin-bottom:30px;width:100%;margin-top:0;
+    span{margin-top:11px;float:left}
+    .add-user-btn{
+      border: none;
+      border-radius: 29px;
+      background-color: #0404e3ab;
+      color: white;
+      float:right;
+      padding:0 30px;
+      width:auto;
+      height:56px;
+      line-height:56px;
+      margin-top:0
+    }
   }
+  .mat-paginator {
+    display: block;
+    margin-top: 5px;
+  }
+  .edit-user{
+    background-color: #0404e3ab;
+    border: none;
+    border-radius: 10px;
+  }
+  .mat-icon{
+    padding-top: 5px;
+    color: white;
+  }
+}     

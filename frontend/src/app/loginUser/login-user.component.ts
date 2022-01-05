@@ -1,29 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
+import { BehaviorSubject } from 'rxjs';
 import { LoginGQL } from 'src/common/graphql/generated/graphql';
-const Login = gql`
-  query Login($signinInput: SignInInput!) {
-    Login(signinInput: $signinInput){
-      user{
-        id
-      }
-    }
-  }
-`;
+import { AuthService } from '../auth/auth.service';
+
 @Component({
-  // selector: 'app-root',
   templateUrl: './login-user.component.html',
   styleUrls: ['./login-user.component.scss'],
 })
 export class LoginUserComponent implements OnInit {
   loginForm!: FormGroup;
   submitted: Boolean = false;
+  isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  
   constructor(private form: FormBuilder,
     private apollo: Apollo,
     private LoginQuery:LoginGQL,
-    private router: Router) {}
+    private router: Router,
+    public authService:AuthService) {}
 
   ngOnInit(): void {
     this.loginForm = this.form.group({
@@ -33,12 +29,18 @@ export class LoginUserComponent implements OnInit {
     
   }
   onSubmit() {
-    this.submitted = true;
-    this.LoginQuery.fetch({ input: this.loginForm.value }).subscribe((data) => {
-      this.router.navigate(['/user']);
-    });
+    if(this.loginForm.valid){
+      this.submitted = true;
+      this.LoginQuery.fetch({ input: this.loginForm.value }).subscribe((data) => {
+        const accessToken =  data.data.Login.accessToken;
+        this.authService.login(accessToken);
+        setTimeout(() => {
+          this.router.navigate(['dashboard']);
+        },1000);
+      });
+    }
   }
- get validate() {
+  get validate() {
     return this.loginForm.controls;
   }
 }

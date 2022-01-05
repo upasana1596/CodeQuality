@@ -1,8 +1,8 @@
-mutation SignUp($input: UserInput!
-) {
-  SignUp(input:$input
-  )
-}
+# mutation SignUp($input: UserInput!
+# ) {
+#   SignUp(input:$input
+#   )
+# }
 
 mutation UpdateResetUserPassword($email: String!, $newPasswordHash: String!, $oldpasswordHash:String!){
   UpdateResetUserPassword(email:$email,newPasswordHash:$newPasswordHash, oldpasswordHash:$oldpasswordHash)
@@ -10,4 +10,17 @@ mutation UpdateResetUserPassword($email: String!, $newPasswordHash: String!, $ol
 
 mutation UpdateForgotUserPassword($email: String!, $newPasswordHash: String!){
   UpdateForgotUserPassword(email:$email,newPasswordHash:$newPasswordHash)
+}
+mutation SignUp($first_name:String!,$last_name:String!,$email:String!,$mobile_no:Float!){
+  SignUp(first_name:$first_name
+    last_name:$last_name
+    email:$email
+  	mobile_no:$mobile_no)
+}
+mutation UpdateUser($id:String!,$first_name:String!,$last_name:String!,$email:String!,$mobile_no:Float!){
+  UpdateUser(id:$id,first_name:$first_name,last_name:$last_name,email:$email,mobile_no:$mobile_no){
+    last_name
+    first_name
+    email
+  }
 }
