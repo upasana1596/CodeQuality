@@ -18,6 +18,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UpdateUsersComponent } from './update-users/update-users.component';
 import { AuthService } from './auth/auth.service';
+import { ResetPasswordComponent } from './resetPassword/reset-password.component';
+import { CompleteAccountComponent } from './completeAccount/complete-account.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { AuthService } from './auth/auth.service';
     LoginUserComponent,
     UserComponent,
     ForgotPasswordComponent,
+    ResetPasswordComponent,
+    CompleteAccountComponent,
     UpdateUsersComponent
   ],
   imports: [

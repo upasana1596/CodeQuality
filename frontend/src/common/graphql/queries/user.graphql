@@ -11,10 +11,20 @@ query Login($input: SignInInput!) {
   Login(signinInput: $input){
     accessToken
     user{
-      id
-      email
-    }
+        id
+        first_name
+        last_name
+        email
+      }
+      accessToken
   }
+}
+query SendForgotPasswordRequest($email: String!){
+SendForgotPasswordRequest(email:$email)
+}
+
+query SendResetPasswordRequest($email: String!){
+  SendResetPasswordRequest(email:$email)
 }
 
 query GetUserByID ($id: String!){

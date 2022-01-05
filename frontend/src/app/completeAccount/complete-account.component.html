@@ -1,0 +1,49 @@
+<div class="body">
+    <div class="container account-container z-index">
+        <div class="card-container">
+          <div class="text-center mb-5"><img src="assets/images/logo.png" class="logo" alt="Responsive image" width="240"/></div>
+          <form [formGroup]="userDetailForm" (ngSubmit)="UpdateUserDetail()" class="from-white">
+            <h2 class="text-center mb-4">Complete Your Account</h2>
+            <div class="flash-message-display">
+              <flash-messages></flash-messages>
+            </div>
+            <p class="text-center mb-4">Enter your details below to gain access to App Name.</p>
+            <fieldset class="form-group">          
+                <input [disabled]="true" formControlName="email" required type="text" class="inp_1" value={{emailId}} placeholder=" "/>
+                <label>Email Address</label>
+            </fieldset> 
+            <!-- <fieldset class="form-group">          
+                <input formControlName="username" required type="text" class="inp_1" [ngClass]="{ 'is-invalid': submitted && records.username.errors }" placeholder=" "/>
+                <label>Username</label>        
+                <div *ngIf="submitted && records.username.errors" class="invalid-feedback">
+                  <div *ngIf="records.username.errors.required">Username is required</div>
+                </div>    
+            </fieldset>                 -->
+            <fieldset class="form-group">
+                <img src="assets/images/view-icon.svg" class="view-icon"/>            
+                <input [(ngModel)]="passwordHash" formControlName="passwordHash" type="password" class="inp_1" required [ngClass]="{ 'is-invalid': submitted && records.passwordHash.errors }" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" placeholder=" "/>   
+                <label for="">Password</label>           
+                <div *ngIf="submitted && records.passwordHash.errors" class="invalid-feedback">
+                  <div *ngIf="records.passwordHash.errors?.required">Password is required</div>
+                  <div *ngIf="records.passwordHash.errors?.pattern" class="validate-field"> Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                      letter and 1 number</div>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <img src="assets/images/view-icon.svg" class="view-icon"/>            
+                <input [(ngModel)]="confirmPassword"  formControlName="confirmPassword" type="password" class="inp_1" required [ngClass]="{ 'is-invalid': submitted && records.confirmPassword.errors }" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" placeholder=" "/>
+                <label>Confirm Password</label>  
+                <div *ngIf="submitted && records.confirmPassword.errors" class="invalid-feedback">
+                  <div *ngIf="records.confirmPassword.errors?.required">Confirm Password is required</div>
+                  <div *ngIf="records.confirmPassword.errors?.pattern" class="validate-field"> Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                    letter and 1 number</div>
+                </div>
+                <p class="error" *ngIf="passwordHash !== confirmPassword" class="validate-field">
+                  Password does not match the confirm password.
+              </p>
+            </fieldset> 
+            <button class="btn-block signin-btn yellow-btn" type="submit">Submit</button>             
+          </form> 
+        </div>
+      </div>  
+  </div>
