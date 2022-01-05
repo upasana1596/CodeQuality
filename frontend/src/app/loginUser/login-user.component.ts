@@ -31,9 +31,11 @@ export class LoginUserComponent implements OnInit {
   onSubmit() {
     if(this.loginForm.valid){
       this.submitted = true;
-      this.LoginQuery.fetch({ input: this.loginForm.value }).subscribe((data) => {
+      this.LoginQuery.watch({ input: this.loginForm.value }).valueChanges.subscribe((data) => {
         const accessToken =  data.data.Login.accessToken;
-        this.authService.login(accessToken);
+        this.authService.login(
+          data.data.Login.accessToken,
+        );
         setTimeout(() => {
           this.router.navigate(['dashboard']);
         },400);

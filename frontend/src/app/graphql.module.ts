@@ -19,7 +19,6 @@ export function createApollo(httpLink: HttpLink, router: Router) {
   const auth = setContext((operation, context) => {
     // Get the authentication token from local storage if it exists
     const token = localStorage.getItem('accessToken');
-    console.log(token,"tokem")
     if (token === null) {
       return {};
     } else {
@@ -46,8 +45,7 @@ export function createApollo(httpLink: HttpLink, router: Router) {
     }
   });
 
-  const uri = 'http://localhost:3000/graphql';
-  console.log("uri",uri)
+  const uri  = 'http://localhost:3000/graphql';
 
   const link = ApolloLink.from([basic, auth, error, httpLink.create({ uri })]);
   const cache = new InMemoryCache();

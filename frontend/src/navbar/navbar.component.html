@@ -1,5 +1,5 @@
 <ng-container>
-    <nav class="navbar navbar-expand-lg navbar-light navbar-bg" *ngIf="authService.loggedIn | async">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-bg" *ngIf="authService.isLoggedIn | async">
         <div class="d-flex w-25 order-0">
             <img src="assets/images/logo.png" class="logo" alt="Responsive image" />
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
@@ -15,6 +15,23 @@
                     <a class="nav-link" routerLink="/users">Users</a>
                 </li>
             </ul>
+        </div>
+        <div class="mt-1 w-25 text-right order-1 order-md-last user-col">
+            <div class="right-sec">
+                <span class="user-icon">
+                    <img src="assets/images/user-icon.svg" width="40" alt="User" />
+                </span>
+                <a href="javascript:void(0)" class="arrow">
+                    <img src="assets/images/down-arrow.png" width="12" height="8" alt="" />
+                    <ul>
+                        <li class="black"><a routerLink="/my-account"><img src="assets/images/account.svg" alt="" /> My Account</a> </li>
+                        <ng-container *ngIf="authService.isLoggedIn | async">
+                          <li class="red"><a href="javascript: void(0);" (click)="signOut()"><img src="assets/images/close.svg" alt="" /> Sign Out</a></li>
+                        </ng-container>
+                    </ul>
+                </a>
+            </div>
+    
         </div>
     </nav>
 </ng-container>

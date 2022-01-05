@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
   constructor(private apollo:Apollo, private router: Router,private getUserQuery:GetAllUsersGQL) { }
 
   ngOnInit(): void {
-    this.getUserQuery.fetch().subscribe((data:any) => {
+    this.getUserQuery.watch().valueChanges.subscribe((data:any) => {
       this.dataSource= data.data.GetAllUsers;
     });
   }
