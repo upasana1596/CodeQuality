@@ -230,6 +230,7 @@ export class AuthResolver {
     @Args('email', { type: () => String }) email: string,
     @Args('newPasswordHash', { type: () => String }) passwordHash: string,
   ): Promise<boolean> {
+    console.log("test")
     const user = await this.userService.updateForgotUserPassword(email, passwordHash);
     if (user) {
       return true;

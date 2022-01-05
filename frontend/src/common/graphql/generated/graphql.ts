@@ -154,12 +154,43 @@ export type SignUpMutationVariables = Exact<{
 
 export type SignUpMutation = { __typename?: 'Mutation', SignUp: boolean };
 
+export type UpdateResetUserPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+  newPasswordHash: Scalars['String'];
+  oldpasswordHash: Scalars['String'];
+}>;
+
+
+export type UpdateResetUserPasswordMutation = { __typename?: 'Mutation', UpdateResetUserPassword: boolean };
+
+export type UpdateForgotUserPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+  newPasswordHash: Scalars['String'];
+}>;
+
+
+export type UpdateForgotUserPasswordMutation = { __typename?: 'Mutation', UpdateForgotUserPassword: boolean };
+
 export type LoginQueryVariables = Exact<{
   input: SignInInput;
 }>;
 
 
-export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', user: { __typename?: 'UserDto', id: string, email?: string | null | undefined } } };
+export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', accessToken: string, user: { __typename?: 'UserDto', id: string, first_name: string, last_name: string, email?: string | null | undefined } } };
+
+export type SendForgotPasswordRequestQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type SendForgotPasswordRequestQuery = { __typename?: 'Query', SendForgotPasswordRequest: boolean };
+
+export type SendResetPasswordRequestQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type SendResetPasswordRequestQuery = { __typename?: 'Query', SendResetPasswordRequest: boolean };
 
 export const SignUpDocument = gql`
     mutation SignUp($input: UserInput!) {
@@ -177,13 +208,52 @@ export const SignUpDocument = gql`
       super(apollo);
     }
   }
+export const UpdateResetUserPasswordDocument = gql`
+    mutation UpdateResetUserPassword($email: String!, $newPasswordHash: String!, $oldpasswordHash: String!) {
+  UpdateResetUserPassword(
+    email: $email
+    newPasswordHash: $newPasswordHash
+    oldpasswordHash: $oldpasswordHash
+  )
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateResetUserPasswordGQL extends Apollo.Mutation<UpdateResetUserPasswordMutation, UpdateResetUserPasswordMutationVariables> {
+    override document = UpdateResetUserPasswordDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateForgotUserPasswordDocument = gql`
+    mutation UpdateForgotUserPassword($email: String!, $newPasswordHash: String!) {
+  UpdateForgotUserPassword(email: $email, newPasswordHash: $newPasswordHash)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateForgotUserPasswordGQL extends Apollo.Mutation<UpdateForgotUserPasswordMutation, UpdateForgotUserPasswordMutationVariables> {
+    override document = UpdateForgotUserPasswordDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginDocument = gql`
     query Login($input: SignInInput!) {
   Login(signinInput: $input) {
     user {
       id
+      first_name
+      last_name
       email
     }
+    accessToken
   }
 }
     `;
@@ -193,6 +263,38 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
     override document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SendForgotPasswordRequestDocument = gql`
+    query SendForgotPasswordRequest($email: String!) {
+  SendForgotPasswordRequest(email: $email)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SendForgotPasswordRequestGQL extends Apollo.Query<SendForgotPasswordRequestQuery, SendForgotPasswordRequestQueryVariables> {
+    override document = SendForgotPasswordRequestDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SendResetPasswordRequestDocument = gql`
+    query SendResetPasswordRequest($email: String!) {
+  SendResetPasswordRequest(email: $email)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SendResetPasswordRequestGQL extends Apollo.Query<SendResetPasswordRequestQuery, SendResetPasswordRequestQueryVariables> {
+    override document = SendResetPasswordRequestDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

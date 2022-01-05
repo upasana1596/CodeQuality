@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
 import { LoginGQL } from 'src/common/graphql/generated/graphql';
 const Login = gql`
@@ -21,7 +22,8 @@ export class LoginUserComponent implements OnInit {
   submitted: Boolean = false;
   constructor(private form: FormBuilder,
     private apollo: Apollo,
-    private LoginQuery:LoginGQL,) {}
+    private LoginQuery:LoginGQL,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.form.group({
@@ -31,21 +33,10 @@ export class LoginUserComponent implements OnInit {
     
   }
   onSubmit() {
-    console.log('this.loginForm', this.loginForm.value);
     this.submitted = true;
     this.LoginQuery.fetch({ input: this.loginForm.value }).subscribe((data) => {
-      console.log('data', data);
+      this.router.navigate(['/user']);
     });
-    // this.apollo
-    //   .watchQuery<unknown>({
-    //     query: Login,
-    //     variables: {
-    //       signinInput: this.loginForm.value,
-    //     },
-    //   })
-    //   .valueChanges.subscribe((_data: unknown) => {
-    //     console.log('_data', _data);
-    //   });
   }
  get validate() {
     return this.loginForm.controls;
