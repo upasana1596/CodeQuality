@@ -228,7 +228,7 @@ export const UpdateResetUserPasswordDocument = gql`
     providedIn: 'root'
   })
   export class UpdateResetUserPasswordGQL extends Apollo.Mutation<UpdateResetUserPasswordMutation, UpdateResetUserPasswordMutationVariables> {
-    document = UpdateResetUserPasswordDocument;
+    override document = UpdateResetUserPasswordDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -244,7 +244,7 @@ export const UpdateForgotUserPasswordDocument = gql`
     providedIn: 'root'
   })
   export class UpdateForgotUserPasswordGQL extends Apollo.Mutation<UpdateForgotUserPasswordMutation, UpdateForgotUserPasswordMutationVariables> {
-    document = UpdateForgotUserPasswordDocument;
+    override document = UpdateForgotUserPasswordDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -265,7 +265,7 @@ export const SignUpDocument = gql`
     providedIn: 'root'
   })
   export class SignUpGQL extends Apollo.Mutation<SignUpMutation, SignUpMutationVariables> {
-    document = SignUpDocument;
+    override document = SignUpDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -291,7 +291,7 @@ export const UpdateUserDocument = gql`
     providedIn: 'root'
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
-    document = UpdateUserDocument;
+    override document = UpdateUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -312,7 +312,7 @@ export const GetAllUsersDocument = gql`
     providedIn: 'root'
   })
   export class GetAllUsersGQL extends Apollo.Query<GetAllUsersQuery, GetAllUsersQueryVariables> {
-    document = GetAllUsersDocument;
+    override document = GetAllUsersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -337,7 +337,7 @@ export const LoginDocument = gql`
     providedIn: 'root'
   })
   export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
-    document = LoginDocument;
+    override document = LoginDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -353,7 +353,7 @@ export const SendForgotPasswordRequestDocument = gql`
     providedIn: 'root'
   })
   export class SendForgotPasswordRequestGQL extends Apollo.Query<SendForgotPasswordRequestQuery, SendForgotPasswordRequestQueryVariables> {
-    document = SendForgotPasswordRequestDocument;
+    override document = SendForgotPasswordRequestDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -369,7 +369,7 @@ export const SendResetPasswordRequestDocument = gql`
     providedIn: 'root'
   })
   export class SendResetPasswordRequestGQL extends Apollo.Query<SendResetPasswordRequestQuery, SendResetPasswordRequestQueryVariables> {
-    document = SendResetPasswordRequestDocument;
+    override document = SendResetPasswordRequestDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -391,7 +391,7 @@ export const GetUserByIdDocument = gql`
     providedIn: 'root'
   })
   export class GetUserByIdGQL extends Apollo.Query<GetUserByIdQuery, GetUserByIdQueryVariables> {
-    document = GetUserByIdDocument;
+    override document = GetUserByIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

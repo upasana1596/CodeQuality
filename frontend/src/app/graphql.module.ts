@@ -19,6 +19,7 @@ export function createApollo(httpLink: HttpLink, router: Router) {
   const auth = setContext((operation, context) => {
     // Get the authentication token from local storage if it exists
     const token = localStorage.getItem('accessToken');
+    console.log(token,"tokem")
     if (token === null) {
       return {};
     } else {

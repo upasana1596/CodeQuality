@@ -9,7 +9,7 @@ export class PasswordResetDetailResolver {
 
     /**
      * Get All Password Reset Details. 
-     * @return users information.
+     * @return password reset details information.
      */
 
     @Query(() => [PasswordResetDetailDto], { name: 'getAllPasswordDetail' })
@@ -17,6 +17,10 @@ export class PasswordResetDetailResolver {
         return this.passwordService.findAll();
     }
 
+    /**
+     * Add Password Reset Details. 
+     * @return password reset detail information.
+     */
     @Mutation(() => PasswordResetDetailDto, { name: 'addPasswordDetail' })
     async addPasswordDetail(
         @Args('email', { type: () => String }) email: string,

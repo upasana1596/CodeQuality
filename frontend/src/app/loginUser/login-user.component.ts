@@ -36,7 +36,7 @@ export class LoginUserComponent implements OnInit {
         this.authService.login(accessToken);
         setTimeout(() => {
           this.router.navigate(['dashboard']);
-        },1000);
+        },400);
       });
     }
   }
