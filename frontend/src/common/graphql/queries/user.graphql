@@ -7,8 +7,18 @@
 query Login($input: SignInInput!) {
   Login(signinInput: $input){
     user{
-      id
-      email
-    }
+        id
+        first_name
+        last_name
+        email
+      }
+      accessToken
   }
+}
+query SendForgotPasswordRequest($email: String!){
+SendForgotPasswordRequest(email:$email)
+}
+
+query SendResetPasswordRequest($email: String!){
+  SendResetPasswordRequest(email:$email)
 }

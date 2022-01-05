@@ -3,3 +3,11 @@ mutation SignUp($input: UserInput!
   SignUp(input:$input
   )
 }
+
+mutation UpdateResetUserPassword($email: String!, $newPasswordHash: String!, $oldpasswordHash:String!){
+  UpdateResetUserPassword(email:$email,newPasswordHash:$newPasswordHash, oldpasswordHash:$oldpasswordHash)
+}
+
+mutation UpdateForgotUserPassword($email: String!, $newPasswordHash: String!){
+  UpdateForgotUserPassword(email:$email,newPasswordHash:$newPasswordHash)
+}

@@ -17,6 +17,10 @@ import { UserComponent } from './user/user.component';
 import { ForgotPasswordComponent } from './forgotPassword/forgot-password.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { ResetPasswordComponent } from './resetPassword/reset-password.component';
+import { CompleteAccountComponent } from './completeAccount/complete-account.component';
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     ListUserComponent,
     LoginUserComponent,
     UserComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    CompleteAccountComponent
   ],
   imports: [
     BrowserModule,
