@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
+import { PasswordResetDetailModule } from './password-reset-detail/password-reset-detail.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
       playground: true
     }),
     MongooseModule.forRoot('mongodb://localhost/demo'), 
-    UserModule, MailModule, AuthModule],
+    UserModule, MailModule, AuthModule, PasswordResetDetailModule,PasswordResetDetailModule],
   providers: [AppService],
 })
 export class AppModule {}

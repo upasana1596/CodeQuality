@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { PasswordResetDetailModule } from 'src/password-reset-detail/password-reset-detail.module';
+import { PasswordResetDetailResolver } from 'src/password-reset-detail/password-reset-detail.resolver';
 import { JwtStrategy } from 'src/strategies/jwt.strategy';
 import { LocalStrategy } from 'src/strategies/local.startegy';
 import { UserModule } from 'src/user/user.module';
@@ -11,6 +13,7 @@ import { jwtConstants } from './constants';
 @Module({
   imports: [
     UserModule,
+    PasswordResetDetailModule,
     JwtModule.registerAsync({
       useFactory: async () => ({
         secret: jwtConstants,
@@ -19,6 +22,6 @@ import { jwtConstants } from './constants';
     }),
     PassportModule,
   ],
-  providers:[AuthService,JwtStrategy,LocalStrategy,AuthResolver]
+  providers:[AuthService,JwtStrategy,LocalStrategy,AuthResolver,PasswordResetDetailResolver]
 })
 export class AuthModule {}

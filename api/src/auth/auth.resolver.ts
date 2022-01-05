@@ -11,10 +11,11 @@ import { GqlAuthGuard } from 'src/guards/gql-auth.guard';
 import { SigninDto } from 'src/user/dto/signin.dto';
 import { SignInInput } from 'src/user/signin.input';
 import { AuthService } from './auth.service';
+import { PasswordResetDetailResolver } from 'src/password-reset-detail/password-reset-detail.resolver';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private readonly userService: UserService,private mailService: MailService,private readonly authService: AuthService) {}
+  constructor(private readonly userService: UserService,private mailService: MailService,public passwordResetTempResolver: PasswordResetDetailResolver,private readonly authService: AuthService) {}
 
   /**
   * Get All Users Info. 
@@ -178,6 +179,7 @@ export class AuthResolver {
       const verification_code = uuid();
       const result = await this.mailService.sendForgotPasswordLink(email, verification_code);
       if (result.Status === 200) {
+        await this.passwordResetTempResolver.addPasswordDetail(email, verification_code);
         return true;
       } else {
         return false;

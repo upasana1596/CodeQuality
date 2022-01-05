@@ -2,6 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type PasswordResetDetailDto {
+  email: String
+  verification_code: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  expTime: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type UserDto {
   id: ID!
   first_name: String
@@ -14,11 +27,6 @@ type UserDto {
   createdAt: DateTime
   updatedAt: DateTime
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type SigninDto {
   accessToken: String!
@@ -33,6 +41,7 @@ type Query {
   Login(signinInput: SignInInput!): SigninDto!
   SendForgotPasswordRequest(email: String!): Boolean!
   SendResetPasswordRequest(email: String!): Boolean!
+  getAllPasswordDetail: [PasswordResetDetailDto!]!
 }
 
 input SignInInput {
@@ -48,4 +57,5 @@ type Mutation {
   UpdateUser(mobile_no: Float, email: String, last_name: String, first_name: String, id: String!): UserDto!
   UpdateResetUserPassword(oldpasswordHash: String!, newPasswordHash: String!, email: String!): Boolean!
   UpdateForgotUserPassword(newPasswordHash: String!, email: String!): Boolean!
+  addPasswordDetail(verification_code: String!, email: String!): PasswordResetDetailDto!
 }
