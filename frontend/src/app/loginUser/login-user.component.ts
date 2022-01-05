@@ -17,8 +17,8 @@ export class LoginUserComponent implements OnInit {
   
   constructor(private form: FormBuilder,
     private apollo: Apollo,
-    private router:Router,
     private LoginQuery:LoginGQL,
+    private router: Router,
     public authService:AuthService) {}
 
   ngOnInit(): void {
@@ -29,7 +29,6 @@ export class LoginUserComponent implements OnInit {
     
   }
   onSubmit() {
-    console.log('this.loginForm', this.loginForm.value);
     if(this.loginForm.valid){
       this.submitted = true;
       this.LoginQuery.fetch({ input: this.loginForm.value }).subscribe((data) => {

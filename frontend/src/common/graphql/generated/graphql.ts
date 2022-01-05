@@ -143,6 +143,23 @@ export type UserDto = {
   verification_code?: Maybe<Scalars['String']>;
 };
 
+export type UpdateResetUserPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+  newPasswordHash: Scalars['String'];
+  oldpasswordHash: Scalars['String'];
+}>;
+
+
+export type UpdateResetUserPasswordMutation = { __typename?: 'Mutation', UpdateResetUserPassword: boolean };
+
+export type UpdateForgotUserPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+  newPasswordHash: Scalars['String'];
+}>;
+
+
+export type UpdateForgotUserPasswordMutation = { __typename?: 'Mutation', UpdateForgotUserPassword: boolean };
+
 export type SignUpMutationVariables = Exact<{
   first_name: Scalars['String'];
   last_name: Scalars['String'];
@@ -174,7 +191,21 @@ export type LoginQueryVariables = Exact<{
 }>;
 
 
-export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', accessToken: string, user: { __typename?: 'UserDto', id: string, email?: string | null | undefined } } };
+export type LoginQuery = { __typename?: 'Query', Login: { __typename?: 'SigninDto', accessToken: string, user: { __typename?: 'UserDto', id: string, first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined } } };
+
+export type SendForgotPasswordRequestQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type SendForgotPasswordRequestQuery = { __typename?: 'Query', SendForgotPasswordRequest: boolean };
+
+export type SendResetPasswordRequestQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type SendResetPasswordRequestQuery = { __typename?: 'Query', SendResetPasswordRequest: boolean };
 
 export type GetUserByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -183,6 +214,42 @@ export type GetUserByIdQueryVariables = Exact<{
 
 export type GetUserByIdQuery = { __typename?: 'Query', GetUserByID: { __typename?: 'UserDto', first_name?: string | null | undefined, last_name?: string | null | undefined, email?: string | null | undefined, passwordHash?: string | null | undefined, mobile_no?: number | null | undefined } };
 
+export const UpdateResetUserPasswordDocument = gql`
+    mutation UpdateResetUserPassword($email: String!, $newPasswordHash: String!, $oldpasswordHash: String!) {
+  UpdateResetUserPassword(
+    email: $email
+    newPasswordHash: $newPasswordHash
+    oldpasswordHash: $oldpasswordHash
+  )
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateResetUserPasswordGQL extends Apollo.Mutation<UpdateResetUserPasswordMutation, UpdateResetUserPasswordMutationVariables> {
+    document = UpdateResetUserPasswordDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateForgotUserPasswordDocument = gql`
+    mutation UpdateForgotUserPassword($email: String!, $newPasswordHash: String!) {
+  UpdateForgotUserPassword(email: $email, newPasswordHash: $newPasswordHash)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateForgotUserPasswordGQL extends Apollo.Mutation<UpdateForgotUserPasswordMutation, UpdateForgotUserPasswordMutationVariables> {
+    document = UpdateForgotUserPasswordDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const SignUpDocument = gql`
     mutation SignUp($first_name: String!, $last_name: String!, $email: String!, $mobile_no: Float!) {
   SignUp(
@@ -198,7 +265,7 @@ export const SignUpDocument = gql`
     providedIn: 'root'
   })
   export class SignUpGQL extends Apollo.Mutation<SignUpMutation, SignUpMutationVariables> {
-    override document = SignUpDocument;
+    document = SignUpDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -224,7 +291,7 @@ export const UpdateUserDocument = gql`
     providedIn: 'root'
   })
   export class UpdateUserGQL extends Apollo.Mutation<UpdateUserMutation, UpdateUserMutationVariables> {
-    override document = UpdateUserDocument;
+    document = UpdateUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -245,7 +312,7 @@ export const GetAllUsersDocument = gql`
     providedIn: 'root'
   })
   export class GetAllUsersGQL extends Apollo.Query<GetAllUsersQuery, GetAllUsersQueryVariables> {
-    override document = GetAllUsersDocument;
+    document = GetAllUsersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -257,8 +324,11 @@ export const LoginDocument = gql`
     accessToken
     user {
       id
+      first_name
+      last_name
       email
     }
+    accessToken
   }
 }
     `;
@@ -267,7 +337,39 @@ export const LoginDocument = gql`
     providedIn: 'root'
   })
   export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
-    override document = LoginDocument;
+    document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SendForgotPasswordRequestDocument = gql`
+    query SendForgotPasswordRequest($email: String!) {
+  SendForgotPasswordRequest(email: $email)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SendForgotPasswordRequestGQL extends Apollo.Query<SendForgotPasswordRequestQuery, SendForgotPasswordRequestQueryVariables> {
+    document = SendForgotPasswordRequestDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SendResetPasswordRequestDocument = gql`
+    query SendResetPasswordRequest($email: String!) {
+  SendResetPasswordRequest(email: $email)
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SendResetPasswordRequestGQL extends Apollo.Query<SendResetPasswordRequestQuery, SendResetPasswordRequestQueryVariables> {
+    document = SendResetPasswordRequestDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -289,7 +391,7 @@ export const GetUserByIdDocument = gql`
     providedIn: 'root'
   })
   export class GetUserByIdGQL extends Apollo.Query<GetUserByIdQuery, GetUserByIdQueryVariables> {
-    override document = GetUserByIdDocument;
+    document = GetUserByIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
